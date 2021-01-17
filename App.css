@@ -76,6 +76,12 @@ main {
   grid-column: 2 / 3;
   padding: 0px 0px 10px 0px;
 }
+
+.price{
+  font-size: 25px;
+}
+
+
 .clickZone{
   grid-column: 1 / 4;
   background-color: aquamarine;

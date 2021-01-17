@@ -10,52 +10,72 @@ const App = {
       factory: [
         {
           name: `Боевые искусства`,
-          quantity: 10,
+          quantity: 1,
+          baseCost: 15,
+          nowCost: 15,
           damagePerSecond: 1
         },
         {
           name: `Соратники`,
-          quantity: 10,
+          quantity: 0,
+          baseCost: 100,
+          nowCost: 100,
           damagePerSecond: 1
         },
         {
           name: `Тотализатор`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 500,
+          nowCost: 500,
           damagePerSecond: 1
         },
         {
           name: `Кузня`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 3000,
+          nowCost: 3000,
           damagePerSecond: 1
         },
         {
           name: `Самострелы`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 10000,
+          nowCost: 10000,
           damagePerSecond: 1
         },
         {
           name: `Металлургия`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 40000,
+          nowCost: 40000,
           damagePerSecond: 1
         },
         {
           name: `Огнестрел`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 200000,
+          nowCost: 200000,
           damagePerSecond: 1
         },
         {
           name: `Взрывчатка`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 1666666,
+          nowCost: 1666666,
           damagePerSecond: 1
         },
         {
           name: `ДВС`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 123456789,
+          nowCost: 123456789,
           damagePerSecond: 1
         },
         {
           name: `Планер`,
-          quantity: 3,
+          quantity: 0,
+          baseCost: 9123456789,
+          nowCost: 9123456789,
           damagePerSecond: 1
         }
       ],
@@ -83,9 +103,19 @@ const App = {
     monstorsHP(monstorLVL) {
       return monstorLVL * 2 + 10
     },
+    buyFactory(i) {
+      if (this.money > this.factory[i].nowCost) {
+        return (
+          this.money = this.money - this.factory[i].nowCost,
+          this.factory[i].quantity++,
+          this.factory[i].nowCost = Math.round(Math.pow(this.factory[i].nowCost, 1.05))
+        )
+      }
+
+    },
     damageAtMonstors() {
-      return this.thisMonstorHP = this.thisMonstorHP - 1 - (this.factory[0].quantity * this.factory[0].damagePerSecond)
-    }
+      return this.thisMonstorHP = this.thisMonstorHP - (this.factory[0].quantity * this.factory[0].damagePerSecond)
+    },
 
   },
   computed: {

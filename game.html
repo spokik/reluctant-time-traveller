@@ -34,10 +34,9 @@
 
 
     <aside>
-      <h4>Место для ферм</h4>
       <div class="factory" v-for="(index, i) in  factory">
         <div class="factoryName">{{ index.name }}</div>
-        <div class="price">{{ index.quantity }}</div>
+        <div class="price" @click="buyFactory(i)"> {{ factory[i].nowCost }} </div>
         <div class="damage">Урон: {{factorydamage( index.damagePerSecond, index.quantity)}}</div>
         <div class="quantity">Штук:{{index.quantity}}</div>
       </div>
