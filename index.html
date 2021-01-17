@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="theme.css">
+
+  <title>Vue курс!</title>
+</head>
+
+<body>
+  <div class="container" id="VueJS">
+    <div class="card">
+      <h1> {{ title }}</h1>
+      <div class="form-control">
+        <input type="text" :placeholder="placeholderString"  v-model="inputValue" 
+          @keypress.enter="addNote" />
+      </div>
+      <button class="btn" @click="addNote">добавить</button>
+      <HR />
+
+
+      <ul class="list" v-if="notes.length !== 0">
+        <li class="list-item" v-for="(note, i) in notes">
+          {{i + 1}} | {{ toUpperCase(note) }}
+          <button class="btn danger" @click="removeNote">удалить</button>
+        </li>
+        <HR/>
+        <li>
+          <strong>Общее количество заметок: {{notes.length}}</strong>
+        </li>
+      </ul>
+      <div v-else><b> Заметок пока нет, добавте первую</b> </div>
+      
+      
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

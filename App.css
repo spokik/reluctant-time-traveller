@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  padding: 0;
+  max-width: inherit;
+  background: #fff;
+  color: #4a4a4a;
+}
+header, footer {
+  font-size: large;
+  text-align: center;
+  padding: 0.3em 0;
+  background-color: #4a4a4a;
+  color: #f9f9f9;
+  
+}
+nav {
+  background: #eee;
+}
+main {
+  background: #f9f9f9;
+  display: grid;
+  grid-template-columns: 50px  1fr  50px; 
+  grid-template-rows: min-content min-content min-content 1fr;
+}
+aside {
+  background: #eee;
+}
+.settings {
+  background: #eee;
+}
+.App {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 250px 1fr 1fr 1fr 250px; 
+  grid-template-rows: min-content 1fr min-content;
+}
+header {
+  grid-row: 1;
+  grid-column: 1 / 6;
+  display: grid;
+  grid-template-columns: 250px 1fr 1fr 1fr 250px;
+}
+.glory{
+  grid-row: 1;
+  grid-column: 2 / 3;
+}
+.money{
+  grid-row: 1;
+  grid-column: 3 / 4;
+}
+.lavale{
+  grid-row: 1;
+  grid-column: 4 / 5;
+  
+}
+.settings{
+  grid-row: 2;
+  grid-column: 1 / 2;
+  padding: 0 10px;
+}
+main {
+  grid-row: 2;
+  grid-column: 2 / 5;
+  padding: 0 20px;
+}
+.monstersName{
+  grid-column: 2 / 3;
+  padding: 0 0px;
+  padding: 0px 0px 10px 0px;
+}
+.monstrsHealPoints{
+  grid-column: 2 / 3;
+  padding: 0px 0px 10px 0px;
+}
+.bossesTimer{
+  grid-column: 2 / 3;
+  padding: 0px 0px 10px 0px;
+}
+.clickZone{
+  grid-column: 1 / 4;
+  background-color: aquamarine;
+}
+aside {
+  grid-row: 2;
+  grid-column: 5 / 6;
+  padding: 0 10px;
+}
+
+footer {
+  grid-row: 3;
+  grid-column: 1 / 6;
+}
+
+.factory{
+  display: grid;
+  grid-template-columns: 67% 33%; 
+  height: 60px;
+  border:1px black solid ;
+  margin-bottom: 7px;
+}
+.factoryName{
+  font-weight:700;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+.progressBar {
+  width: 100%;
+  background-color: #ddd;
+}
+.progressBar-red {
+  width: 75%;
+  height: 30px;
+  background-color: #c70c0c;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+.progressBar-green {
+  width: 27%;
+  height: 30px;
+  background-color: #24b81f;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+@keyframes loading {
+  to {
+  width:100%;
+  }
+}

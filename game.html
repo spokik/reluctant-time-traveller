@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="App.css">
+  <link rel="stylesheet" href="index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="App" id="VueJS">
+    <header>
+
+      <div class="glory">Слава 0</div>
+      <div class="money">Деньги {{ money }}</div>
+      <div class="lavale">Lvl 1</div>
+    </header>
+    <div class="settings">Настройки/ статистика</div>
+
+    <main>
+      <div class="monstersName">
+        <h2>Уровень монстра {{ monstorLVL }}</h2>
+      </div>
+      <div class="monstrsHealPoints progressBar ">
+        <div class="progressBar-red">{{ thisMonstorHP }} hp</div>
+      </div>
+      <div class="bossesTimer progressBar progressBar-grean">
+        <div class="progressBar-green">25.8s</div>
+      </div>
+      <div class="clickZone" @click="damageAtMonstors"></div>
+    </main>
+
+
+    <aside>
+      <h4>Место для ферм</h4>
+      <div class="factory" v-for="(index, i) in  factory">
+        <div class="factoryName">{{ index.name }}</div>
+        <div class="price">{{ index.quantity }}</div>
+        <div class="damage">Урон: {{factorydamage( index.damagePerSecond, index.quantity)}}</div>
+        <div class="quantity">Штук:{{index.quantity}}</div>
+      </div>
+
+    </aside>
+
+    <footer>Футтер</footer>
+
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
