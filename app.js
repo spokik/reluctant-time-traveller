@@ -20,7 +20,7 @@ const App = {
           quantity: 0,
           baseCost: 100,
           nowCost: 100,
-          damagePerSecond: 1
+          damagePerSecond: 2
         },
         {
           name: `Тотализатор`,
@@ -82,6 +82,9 @@ const App = {
       notes: [`найти места для рыбалки`, `Выкинуть отчистки от мандаринок`],
     }
   },
+  mounted() {
+    this.startTimer()
+  },
   methods: {
     addNote(event) {
       if (this.inputValue !== ``) {
@@ -111,10 +114,17 @@ const App = {
           this.factory[i].nowCost = Math.round(Math.pow(this.factory[i].nowCost, 1.05))
         )
       }
-
     },
     damageAtMonstors() {
       return this.thisMonstorHP = this.thisMonstorHP - (this.factory[0].quantity * this.factory[0].damagePerSecond)
+    },
+    startTimer() {
+      setInterval(() => {
+        this.thisMonstorHP = this.thisMonstorHP - (this.factory[1].quantity * this.factory[1].damagePerSecond) // наносит урон от соратников в секунду
+        //! Добавить урон в секунду от остальных возможных шахт
+        //! добавить деньги в секунду от предпиятий
+      }, 1000)
+
     },
 
   },
@@ -132,14 +142,13 @@ const App = {
     thisMonstorHP(value) {
       if (value <= 0) {
         this.monstorLVL++
-        this.thisMonstorHP = this.monstorLVL * 2 + 10 //погуглить как использовать метод здесь
+        this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
         this.money = this.money + this.monstorLVL * 2
       }
     }
 
   }
 }
-
 
 const app = Vue.createApp(App)
 app.mount('#VueJS')
