@@ -34,9 +34,19 @@
 
 
     <aside>
-      <div class="factory" v-for="(index, i) in  factory">
+
+      <h1 style="font-size: 20px; text-align: center;">Ваши преобретения</h1>
+
+
+      <div class="tabs__links">
+        <div v-bind:class="{ tabs__links_activ: isDamage }" @click="tabFactorySelect('damage')">Урон</div>
+        <div v-bind:class="{ tabs__links_activ: !isDamage }" @click="tabFactorySelect('factory')">Предприятия</div>
+      </div>
+
+
+      <div class="factory" v-for="(index, i) in  factoryListGeneration">
         <div class="factoryName">{{ index.name }}</div>
-        <div class="price" @click="buyFactory(i)"> {{ factory[i].nowCost }} </div>
+        <div class="price" @click="buyFactory(i)"> {{ factoryListGeneration[i].nowCost }} </div>
         <div class="damage">Урон: {{factorydamage( index.damagePerSecond, index.quantity)}}</div>
         <div class="quantity">Штук:{{index.quantity}}</div>
       </div>

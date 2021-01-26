@@ -1,3 +1,4 @@
+
 const App = {
   data() {
     return {
@@ -5,28 +6,16 @@ const App = {
       placeholderString: "Введите заметку",
       inputValue: ``,
       money: 0,
+      isDamage: true,
       monstorLVL: 1,
       thisMonstorHP: 10,
       factory: [
-        {
-          name: `Боевые искусства`,
-          quantity: 1,
-          baseCost: 15,
-          nowCost: 15,
-          damagePerSecond: 1
-        },
-        {
-          name: `Соратники`,
-          quantity: 0,
-          baseCost: 100,
-          nowCost: 100,
-          damagePerSecond: 2
-        },
         {
           name: `Тотализатор`,
           quantity: 0,
           baseCost: 500,
           nowCost: 500,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -34,6 +23,7 @@ const App = {
           quantity: 0,
           baseCost: 3000,
           nowCost: 3000,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -41,6 +31,7 @@ const App = {
           quantity: 0,
           baseCost: 10000,
           nowCost: 10000,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -48,6 +39,7 @@ const App = {
           quantity: 0,
           baseCost: 40000,
           nowCost: 40000,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -55,6 +47,7 @@ const App = {
           quantity: 0,
           baseCost: 200000,
           nowCost: 200000,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -62,6 +55,7 @@ const App = {
           quantity: 0,
           baseCost: 1666666,
           nowCost: 1666666,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -69,6 +63,7 @@ const App = {
           quantity: 0,
           baseCost: 123456789,
           nowCost: 123456789,
+          isDamage: false,
           damagePerSecond: 1
         },
         {
@@ -76,8 +71,24 @@ const App = {
           quantity: 0,
           baseCost: 9123456789,
           nowCost: 9123456789,
+          isDamage: false,
           damagePerSecond: 1
         }
+      ],
+      damageDealer: [{
+        name: `Боевые искусства`,
+        quantity: 1,
+        baseCost: 15,
+        nowCost: 15,
+        damagePerSecond: 1
+      },
+      {
+        name: `Соратники`,
+        quantity: 0,
+        baseCost: 100,
+        nowCost: 100,
+        damagePerSecond: 2
+      }
       ],
       notes: [`найти места для рыбалки`, `Выкинуть отчистки от мандаринок`],
     }
@@ -116,6 +127,7 @@ const App = {
       }
     },
     damageAtMonstors() {
+      //?Переписать логику нанесения урона. Она большет не работает из-за разделения дамагеров и ферм
       return this.thisMonstorHP = this.thisMonstorHP - (this.factory[0].quantity * this.factory[0].damagePerSecond)
     },
     startTimer() {
@@ -126,12 +138,26 @@ const App = {
       }, 1000)
 
     },
+    tabFactorySelect(usersChoice) {
+      if (usersChoice == 'damage') {
+        return this.isDamage = true
+      } else if (usersChoice == 'factory') {
+        return this.isDamage = false
+      } else { console.log(`error: ${usersChoice} is not valid`) }
+    },
 
   },
   computed: {
-    оптимизирует() {
-      const info = `Если вычисляемое методом исчисляется из данных приложения, лучше использовать компьютед`
-    },
+    factoryListGeneration() {
+      if (this.isDamage) {
+        return this.damageDealer
+      }
+      else {
+        return this.factory
+      }
+
+
+    }
   },
   watch: {
     inputValue(value) {
@@ -147,7 +173,8 @@ const App = {
       }
     }
 
-  }
+  },
+
 }
 
 const app = Vue.createApp(App)
