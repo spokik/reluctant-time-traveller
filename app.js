@@ -5,10 +5,11 @@ const App = {
       title: `Список заметок`,
       placeholderString: "Введите заметку",
       inputValue: ``,
-      money: 0,
+      money: 10000,
       isDamage: true,
       monstorLVL: 1,
       thisMonstorHP: 10,
+      monstorHPcounter: 0,
       factory: [
         {
           name: `Тотализатор`,
@@ -84,12 +85,22 @@ const App = {
       },
       {
         name: `Соратники`,
-        quantity: 0,
+        quantity: 5,
         baseCost: 100,
         nowCost: 100,
         damagePerSecond: 2
       }
       ],
+      styles: {
+        progressBarBoss: {
+          //width: `100%`,
+          height: '30px',
+          backgroundColor: '#c70c0c',
+          textAalign: 'center',
+          lineHeight: '30px',
+          color: 'white',
+        }
+      },
       notes: [`найти места для рыбалки`, `Выкинуть отчистки от мандаринок`],
     }
   },
@@ -110,7 +121,6 @@ const App = {
       this.notes.splice(i, 1)
     },
     //Выше примеры от Владелена
-
     factorydamage(damage, pieces) {
       return damage * pieces
     },
@@ -118,23 +128,32 @@ const App = {
       return monstorLVL * 2 + 10
     },
     buyFactory(i) {
-      if (this.money > this.factory[i].nowCost) {
-        return (
-          this.money = this.money - this.factory[i].nowCost,
-          this.factory[i].quantity++,
-          this.factory[i].nowCost = Math.round(Math.pow(this.factory[i].nowCost, 1.05))
-        )
+      if (this.isDamage) {
+        if (this.money > this.damageDealer[i].nowCost) {
+          return (
+            this.money = this.money - this.damageDealer[i].nowCost,
+            this.damageDealer[i].quantity++,
+            this.damageDealer[i].nowCost = Math.round(Math.pow(this.damageDealer[i].nowCost, 1.05))
+          )
+        }
+      } else {
+        if (this.money > this.factory[i].nowCost) {
+          return (
+            this.money = this.money - this.factory[i].nowCost,
+            this.factory[i].quantity++,
+            this.factory[i].nowCost = Math.round(Math.pow(this.factory[i].nowCost, 1.05))
+          )
+        }
       }
+
     },
-    damageAtMonstors() {
-      //?Переписать логику нанесения урона. Она большет не работает из-за разделения дамагеров и ферм
-      return this.thisMonstorHP = this.thisMonstorHP - (this.factory[0].quantity * this.factory[0].damagePerSecond)
+    clickDamage() {
+      return this.thisMonstorHP = this.thisMonstorHP - (this.damageDealer[0].quantity * this.damageDealer[0].damagePerSecond)
     },
     startTimer() {
       setInterval(() => {
-        this.thisMonstorHP = this.thisMonstorHP - (this.factory[1].quantity * this.factory[1].damagePerSecond) // наносит урон от соратников в секунду
-        //! Добавить урон в секунду от остальных возможных шахт
-        //! добавить деньги в секунду от предпиятий
+        //*Урон в секунду - урон сложенный от всех ДД. Сделать через цикл, когда добавится больше наносителей урона
+        this.thisMonstorHP = this.thisMonstorHP - (this.damageDealer[1].quantity * this.damageDealer[1].damagePerSecond) // наносит урон от соратников в секунду
       }, 1000)
 
     },
@@ -145,7 +164,10 @@ const App = {
         return this.isDamage = false
       } else { console.log(`error: ${usersChoice} is not valid`) }
     },
-
+    proc() {
+      const n = this.monstorsHP(this.monstorLVL) / this.thisMonstorHP + "%"
+      return { width: n }
+    },
   },
   computed: {
     factoryListGeneration() {
@@ -155,9 +177,7 @@ const App = {
       else {
         return this.factory
       }
-
-
-    }
+    },
   },
   watch: {
     inputValue(value) {

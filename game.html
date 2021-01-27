@@ -24,12 +24,12 @@
         <h2>Уровень монстра {{ monstorLVL }}</h2>
       </div>
       <div class="monstrsHealPoints progressBar ">
-        <div class="progressBar-red">{{ thisMonstorHP }} hp</div>
+        <div :style="[styles.progressBarBoss,proc()]">{{ thisMonstorHP }} hp</div>
       </div>
       <div class="bossesTimer progressBar progressBar-grean">
         <div class="progressBar-green">25.8s</div>
       </div>
-      <div class="clickZone" @click="damageAtMonstors"></div>
+      <div class="clickZone" @click="clickDamage"></div>
     </main>
 
 
