@@ -17,14 +17,19 @@
       <div class="money">Деньги {{ money }}</div>
       <div class="lavale">Lvl 1</div>
     </header>
-    <div class="settings">Настройки/ статистика</div>
+    <div class="settings">
+      <h1 style="font-size: 20px; text-align: center;">Ваши преобретения</h1><br>
+      //Попробовать сделать возможность сохранения в ручную, по таймеру и настройки скорости сохронения<BR>
+      <button @click="gameSave()">Сохранить игру</button>
+      <button @click="gameLoad()">Загрузить игру</button>
+    </div>
 
     <main>
       <div class="monstersName">
         <h2>Уровень монстра {{ monstorLVL }}</h2>
       </div>
       <div class="monstrsHealPoints progressBar ">
-        <div :style="[styles.progressBarBoss,proc()]">{{ thisMonstorHP }} hp</div>
+        <div :style="[styles.progressBarBoss,proc()]">{{monstorHPcounter}} из {{ thisMonstorHP }} hp</div>
       </div>
       <div class="bossesTimer progressBar progressBar-grean">
         <div class="progressBar-green">25.8s</div>
@@ -47,14 +52,11 @@
       <div class="factory" v-for="(index, i) in  factoryListGeneration">
         <div class="factoryName">{{ index.name }}</div>
         <div class="price" @click="buyFactory(i)"> {{ factoryListGeneration[i].nowCost }} </div>
-        <div class="damage">Урон: {{factorydamage( index.damagePerSecond, index.quantity)}}</div>
-        <div class="quantity">Штук:{{index.quantity}}</div>
+        <div class="damage">{{index.text.profit}}: {{factorydamage( index.profit, index.quantity)}}</div>
+        <div class="quantity">{{index.text.quantity}}:{{index.quantity}}</div>
       </div>
-
     </aside>
-
-    <footer>Футтер</footer>
-
+    <footer>Футтер </footer>
   </div>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="app.js"></script>
