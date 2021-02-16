@@ -162,6 +162,7 @@ const App = {
       const n = (this.monstorHPcounter / this.thisMonstorHP) * 100 + "%"
       return { width: n }
     },
+    //Возырвщает CSS для обратного отсчета босса
     bossTimerDecrease() {
       const n = (this.bossTimer / 30000) * 100 + "%"
       return {
@@ -194,6 +195,20 @@ const App = {
 
 
       return result
+    },
+    monstorUp(isBoss, isBossDead) {
+      if (isBoss && isBossDead) {
+        this.thisMonstorHP = this.monstorsHP(this.monstorLVL) * 10
+        this.monstorHPcounter = this.monstorsHP(this.monstorLVL) * 10
+        this.money = this.money + this.monstorLVL * 80
+      }
+      if (isBoss && !isBoss) {
+        this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
+        this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
+      }
+      this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
+      this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
+      this.money = this.money + this.monstorLVL * 2
     }
   },
   computed: {
@@ -225,11 +240,10 @@ const App = {
             clearInterval(this.bossTimerIsActiv)
             console.log('Босс пройден')
             this.bossTimer = 30000
+            this.monstorUp(true, true)
           }
         }
-        this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
-        this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
-        this.money = this.money + this.monstorLVL * 2
+        this.monstorUp(false)
       }
     },
     //инициализирует босса
@@ -250,8 +264,7 @@ const App = {
         console.log('boss!!!')
         this.bossTimerIsActiv = setInterval(() => {
           this.bossTimer = this.bossTimer - 10
-        }
-          , 10)
+        }, 10)
       }
     },
     bossTimer(value) {
@@ -260,8 +273,7 @@ const App = {
         console.log('Упс, ты не завалил боссса, придурок!')
         this.bossTimer = 30000
         this.monstorLVL--
-        this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
-        this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
+        this.monstorUp(true, false)
       }
     }
 
