@@ -260,6 +260,8 @@ const App = {
         console.log('Упс, ты не завалил боссса, придурок!')
         this.bossTimer = 30000
         this.monstorLVL--
+        this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
+        this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
       }
     }
 
