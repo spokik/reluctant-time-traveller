@@ -9,6 +9,7 @@ const App = {
       money: 0,
       isDamage: true,
       monstorLVL: 1,
+      partMostors: 0,
       thisMonstorHP: 10,
       monstorHPcounter: 10,
       factory1: [{ "name": "Тотализатор", "baseCost": 500, "profit": 10 }, { "name": "Кузня", "baseCost": 3000, "profit": 1 }, { "name": "Самострелы", "baseCost": 10000, "profit": 1 }, { "name": "Металлургия", "baseCost": 40000, "profit": 1 }, { "name": "Огнестрел", "baseCost": 200000, "profit": 1 }, { "name": "Взрывчатка", "baseCost": 1666666, "profit": 1 }, { "name": "ДВС", "baseCost": 123456789, "profit": 1 }, { "name": "Планер", "baseCost": 9123456789, "profit": 1 }],
@@ -202,7 +203,11 @@ const App = {
     },
     monstorHPcounter(value) {
       if (value <= 0) {
-        this.monstorLVL++
+        this.partMostors = this.partMostors + 0.1
+        if (this.partMostors >= 1) {
+          this.monstorLVL++
+          this.partMostors = 0
+        }
         this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
         this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
         this.money = this.money + this.monstorLVL * 2
