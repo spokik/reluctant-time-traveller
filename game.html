@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="App.css">
   <link rel="stylesheet" href="index.css">
-  <title>Document</title>
+  <title>My book's game</title>
 </head>
 
 <body>
@@ -22,6 +22,9 @@
       //Попробовать сделать возможность сохранения в ручную, по таймеру и настройки скорости сохронения<BR>
       <button @click="gameSave()">Сохранить игру</button>
       <button @click="gameLoad()">Загрузить игру</button>
+      Автосохранение
+      <input type="checkbox" id="checkbox" v-model="autoSave">
+      <label for="checkbox">{{ autoSave }}</label>
     </div>
 
     <main>

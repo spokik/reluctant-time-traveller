@@ -4,6 +4,7 @@ const App = {
     return {
       title: `Список заметок`,
       placeholderString: "Введите заметку",
+      autoSave: true,
       inputValue: ``,
       money: 0,
       isDamage: true,
@@ -29,7 +30,13 @@ const App = {
   },
   mounted() {
     this.startTimer()
-    // создаем фермы
+
+
+    if (this.autoSave) {
+
+    }
+
+    // генерация начальных объектов через конструкторы
     function Factory(name, baseCost, profit) {
       this.name = name
       this.quantity = 0
@@ -109,7 +116,7 @@ const App = {
       const save = JSON.stringify({
         money: this.money,
         monstorLVL: this.monstorLVL,
-        factoru: this.factory,
+        factory: this.factory,
         damageDealer: this.damageDealer
       })
 
@@ -121,7 +128,7 @@ const App = {
     },
     gameLoad() {
 
-      let loadData = JSON.parse(localStorage.save);
+      const loadData = JSON.parse(localStorage.save);
       this.money = loadData.money
       this.monstorLVL = loadData.monstorLVL
       this.factory = loadData.factory
@@ -181,19 +188,3 @@ const App = {
 
 const app = Vue.createApp(App)
 app.mount('#VueJS')
-
-
-[
-  {
-    "name": "Тотализатор",
-    "quantity": 0,
-    "baseCost": 500,
-    "nowCost": 500,
-    "isDamage": false,
-    "text": {
-      "quantity": "Штук",
-      "profit": "Прибыль"
-    }
-  },
-
-  { "name": "Кузня", "quantity": 0, "baseCost": 3000, "nowCost": 3000, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "Самострелы", "quantity": 0, "baseCost": 10000, "nowCost": 10000, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "Металлургия", "quantity": 0, "baseCost": 40000, "nowCost": 40000, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "Огнестрел", "quantity": 0, "baseCost": 200000, "nowCost": 200000, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "Взрывчатка", "quantity": 0, "baseCost": 1666666, "nowCost": 1666666, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "ДВС", "quantity": 0, "baseCost": 123456789, "nowCost": 123456789, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }, { "name": "Планер", "quantity": 0, "baseCost": 9123456789, "nowCost": 9123456789, "isDamage": false, "text": { "quantity": "Штук", "profit": "Прибыль" } }]
