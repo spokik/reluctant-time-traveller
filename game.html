@@ -14,7 +14,7 @@
     <header>
 
       <div class="glory">Слава 0</div>
-      <div class="money">Деньги {{ money }}</div>
+      <div class="money">Деньги {{cutback(money) }}</div>
       <div class="lavale">Lvl 1</div>
     </header>
     <div class="settings">
@@ -22,7 +22,9 @@
       //Попробовать сделать возможность сохранения в ручную, по таймеру и настройки скорости сохронения<BR>
       <button @click="gameSave()">Сохранить игру</button>
       <button @click="gameLoad()">Загрузить игру</button>
-      Автосохранение
+      Автосохранение (не работает)
+
+      {{cutback()}}
       <input type="checkbox" id="checkbox" v-model="autoSave">
       <label for="checkbox">{{ autoSave }}</label>
     </div>
@@ -54,8 +56,8 @@
 
       <div class="factory" v-for="(index, i) in  factoryListGeneration">
         <div class="factoryName">{{ index.name }}</div>
-        <div class="price" @click="buyFactory(i)"> {{ factoryListGeneration[i].nowCost }} </div>
-        <div class="damage">{{index.text.profit}}: {{factorydamage( index.profit, index.quantity)}}</div>
+        <div class="price" @click="buyFactory(i)"> {{ cutback(factoryListGeneration[i].nowCost) }} </div>
+        <div class="damage">{{index.text.profit}}: {{ cutback(factorydamage( index.profit, index.quantity))}}</div>
         <div class="quantity">{{index.text.quantity}}:{{index.quantity}}</div>
       </div>
     </aside>

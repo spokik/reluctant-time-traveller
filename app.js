@@ -152,10 +152,37 @@ const App = {
         return this.isDamage = false
       } else { console.log(`error: ${usersChoice} is not valid`) }
     },
+    //Отображение здоровья в виде процентов.
     proc() {
       const n = (this.monstorHPcounter / this.thisMonstorHP) * 100 + "%"
       return { width: n }
     },
+    cutback(n) {
+      const prefixList = [`k`, `m`, `b`, `t`, `k`, `K`, `s`, `S`]
+      const nubnersList = [
+        1000,
+        1000000,
+        1000000000,
+        1000000000000,
+        1000000000000000,
+        1000000000000000000,
+        1000000000000000000000,
+        1000000000000000000000000
+      ]
+      let result = n
+      for (let i = 0; i < nubnersList.length; i++) {
+        if (n > nubnersList[i]) {
+          result = n / nubnersList[i]
+          result = result.toFixed(1)
+          result += prefixList[i]
+
+        }
+
+      }
+
+
+      return result
+    }
   },
   computed: {
     factoryListGeneration() {
