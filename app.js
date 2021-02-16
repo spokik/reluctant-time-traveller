@@ -10,14 +10,17 @@ const App = {
       isDamage: true,
       monstorLVL: 1,
       partMostors: 0,
+      isBoss: false,
+      bossTimer: 30000,
+      bossTimerIsActiv: null,
       thisMonstorHP: 10,
       monstorHPcounter: 10,
       factory1: [{ "name": "Тотализатор", "baseCost": 500, "profit": 10 }, { "name": "Кузня", "baseCost": 3000, "profit": 1 }, { "name": "Самострелы", "baseCost": 10000, "profit": 1 }, { "name": "Металлургия", "baseCost": 40000, "profit": 1 }, { "name": "Огнестрел", "baseCost": 200000, "profit": 1 }, { "name": "Взрывчатка", "baseCost": 1666666, "profit": 1 }, { "name": "ДВС", "baseCost": 123456789, "profit": 1 }, { "name": "Планер", "baseCost": 9123456789, "profit": 1 }],
       damageDealer1: [{ name: "Боевые искусства", baseCost: 15, profit: 1, }, { name: "Соратники", baseCost: 100, profit: 5, },],
       factory: [],
-      damageDealer: [{ name: `Боевые искусства`, quantity: 1, baseCost: 15, nowCost: 15, profit: 1, text: { "quantity": "Штук", "profit": "Урон" } }],
+      damageDealer: [{ name: `Боевые искусства`, quantity: 1, baseCost: 150, nowCost: 15, profit: 1, text: { "quantity": "Штук", "profit": "Урон" } }],
       styles: {
-        progressBarBoss: {
+        progressBarMostor: {
           //width: `100%`,
           height: '30px',
           backgroundColor: '#c70c0c',
@@ -140,6 +143,7 @@ const App = {
     startTimer() {
       setInterval(() => {
         //*Урон в секунду - урон сложенный от всех ДД. Сделать через цикл, когда добавится больше наносителей урона
+        //*Ускорить время обработки
         this.monstorHPcounter = this.monstorHPcounter - (this.damageDealer[1].quantity * this.damageDealer[1].profit) // наносит урон от соратников в секунду
         this.money = this.money + (this.factory[0].quantity * this.factory[0].profit)
 
@@ -157,6 +161,13 @@ const App = {
     proc() {
       const n = (this.monstorHPcounter / this.thisMonstorHP) * 100 + "%"
       return { width: n }
+    },
+    bossTimerDecrease() {
+      const n = (this.bossTimer / 30000) * 100 + "%"
+      return {
+        width: n,
+        backgroundColor: '#24b81f'
+      }
     },
     cutback(n) {
       const prefixList = [`k`, `m`, `b`, `t`, `k`, `K`, `s`, `S`]
@@ -208,11 +219,50 @@ const App = {
           this.monstorLVL++
           this.partMostors = 0
         }
+
+        if (this.isBoss) {
+          if (this.bossTimer > 0) {
+            clearInterval(this.bossTimerIsActiv)
+            console.log('Босс пройден')
+            this.bossTimer = 30000
+          }
+        }
         this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
         this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
         this.money = this.money + this.monstorLVL * 2
       }
+    },
+    //инициализирует босса
+    monstorLVL(value) {
+
+      if (!(value % 10)) {
+        this.partMostors = 0.9
+        this.thisMonstorHP = this.monstorsHP(this.monstorLVL) * 10
+        this.monstorHPcounter = this.monstorsHP(this.monstorLVL) * 10
+        this.money = this.money + this.monstorLVL * 20
+        this.isBoss = true
+      } else {
+        this.isBoss = false
+      }
+    },
+    isBoss(value) {
+      if (value) {
+        console.log('boss!!!')
+        this.bossTimerIsActiv = setInterval(() => {
+          this.bossTimer = this.bossTimer - 10
+        }
+          , 10)
+      }
+    },
+    bossTimer(value) {
+      if (value <= 0 && this.thisMonstorHP > 0) {
+        clearInterval(this.bossTimerIsActiv)
+        console.log('Упс, ты не завалил боссса, придурок!')
+        this.bossTimer = 30000
+        this.monstorLVL--
+      }
     }
+
 
   },
 
