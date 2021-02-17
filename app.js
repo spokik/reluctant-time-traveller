@@ -13,6 +13,7 @@ const App = {
       isBoss: false,
       bossTimer: 30000,
       bossTimerIsActiv: null,
+      isNextMonstor: true,
       thisMonstorHP: 10,
       monstorHPcounter: 10,
       factory1: [{ "name": "Тотализатор", "baseCost": 500, "profit": 10 }, { "name": "Кузня", "baseCost": 3000, "profit": 1 }, { "name": "Самострелы", "baseCost": 10000, "profit": 1 }, { "name": "Металлургия", "baseCost": 40000, "profit": 1 }, { "name": "Огнестрел", "baseCost": 200000, "profit": 1 }, { "name": "Взрывчатка", "baseCost": 1666666, "profit": 1 }, { "name": "ДВС", "baseCost": 123456789, "profit": 1 }, { "name": "Планер", "baseCost": 9123456789, "profit": 1 }],
@@ -150,6 +151,7 @@ const App = {
       }, 1000)
 
     },
+    //Рендерит вкладку дамагеров или шахт, в зависимости от клика
     tabFactorySelect(usersChoice) {
       if (usersChoice == 'damage') {
         return this.isDamage = true
@@ -170,6 +172,7 @@ const App = {
         backgroundColor: '#24b81f'
       }
     },
+    //Возвращает сокращенное число с префиксом
     cutback(n) {
       const prefixList = [`k`, `m`, `b`, `t`, `k`, `K`, `s`, `S`]
       const nubnersList = [
@@ -230,9 +233,11 @@ const App = {
     monstorHPcounter(value) {
       if (value <= 0) {
         this.partMostors = this.partMostors + 0.1
-        if (this.partMostors >= 1) {
+        if (this.partMostors >= 1 && this.isNextMonstor) {
           this.monstorLVL++
           this.partMostors = 0
+        } else if (this.partMostors >= 0.9 && !this.isNextMonstor) {
+          this.partMostors = this.partMostors - 0.1
         }
 
         if (this.isBoss) {
@@ -274,6 +279,7 @@ const App = {
         this.bossTimer = 30000
         this.monstorLVL--
         this.monstorUp(true, false)
+        this.isNextMonstor = false
       }
     }
 
