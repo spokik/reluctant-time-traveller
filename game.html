@@ -34,7 +34,7 @@
 
     <main>
       <div class="monstersName">
-        <h2>Уровень монстра {{ monstorLVL }} {{partMostors}}</h2>
+        <h2>Уровень монстра {{ monstorLVL }} {{partMostorsView()}}</h2>
       </div>
       <div class="monstrsHealPoints progressBar ">
         <div :style="[styles.progressBarMostor,proc()]">{{monstorHPcounter}} из {{ thisMonstorHP }} hp</div>

@@ -199,6 +199,15 @@ const App = {
 
       return result
     },
+    //Возвращает информацию о части монстра
+    partMostorsView() {
+      if (this.partMostors >= 0.9) {
+        return ``
+      } else {
+        const a = `${Math.round(this.partMostors * 10)} / 10`
+        return a
+      }
+    },
     monstorUp(isBoss, isBossDead) {
       if (isBoss && isBossDead) {
         this.thisMonstorHP = this.monstorsHP(this.monstorLVL) * 10
