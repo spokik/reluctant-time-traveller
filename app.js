@@ -16,10 +16,26 @@ const App = {
       isNextMonstor: true,
       thisMonstorHP: 10,
       monstorHPcounter: 10,
-      factory1: [{ "name": "Тотализатор", "baseCost": 500, "profit": 10 }, { "name": "Кузня", "baseCost": 3000, "profit": 1 }, { "name": "Самострелы", "baseCost": 10000, "profit": 1 }, { "name": "Металлургия", "baseCost": 40000, "profit": 1 }, { "name": "Огнестрел", "baseCost": 200000, "profit": 1 }, { "name": "Взрывчатка", "baseCost": 1666666, "profit": 1 }, { "name": "ДВС", "baseCost": 123456789, "profit": 1 }, { "name": "Планер", "baseCost": 9123456789, "profit": 1 }],
-      damageDealer1: [{ name: "Боевые искусства", baseCost: 15, profit: 1, }, { name: "Соратники", baseCost: 100, profit: 5, },],
+      factory1: [
+        { "name": "Тотализатор", "baseCost": 500, "profit": 10 },
+        { "name": "Кузня", "baseCost": 3000, "profit": 50 },
+        { "name": "Самострелы", "baseCost": 10000, "profit": 250 },
+        { "name": "Металлургия", "baseCost": 40000, "profit": 1500 },
+        { "name": "Огнестрел", "baseCost": 200000, "profit": 30000 },
+        { "name": "Взрывчатка", "baseCost": 1666666, "profit": 600000 },
+        { "name": "ДВС", "baseCost": 123456789, "profit": 1200000 },
+        { "name": "Планер", "baseCost": 9123456789, "profit": 24000000 }],
+      damageDealer1: [
+        { name: "Боевые искусства", baseCost: 15, profit: 1, },
+        { name: "Соратник", baseCost: 100, profit: 5, },
+        { name: "Личная гвардия", baseCost: 2000, profit: 25, },
+        { name: "Маленькая армия", baseCost: 40000, profit: 150, },
+        { name: "Армия страны", baseCost: 800000, profit: 1000, },
+        { name: "Планетарная армия", baseCost: 16000000, profit: 10000, }
+
+        ,],
       factory: [],
-      damageDealer: [{ name: `Боевые искусства`, quantity: 1, baseCost: 150, nowCost: 15, profit: 1, text: { "quantity": "Штук", "profit": "Урон" } }],
+      damageDealer: [{ name: `Боевые искусства`, quantity: 1, baseCost: 15, nowCost: 15, profit: 1, text: { "quantity": "Штук", "profit": "Урон" } }],
       styles: {
         progressBarMostor: {
           //width: `100%`,
