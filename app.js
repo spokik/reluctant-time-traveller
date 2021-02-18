@@ -159,13 +159,24 @@ const App = {
     },
     startTimer() {
       setInterval(() => {
-        //*Урон в секунду - урон сложенный от всех ДД. Сделать через цикл, когда добавится больше наносителей урона
-        //*Ускорить время обработки
-        this.monstorHPcounter = this.monstorHPcounter - (this.damageDealer[1].quantity * this.damageDealer[1].profit) // наносит урон от соратников в секунду
-        this.money = this.money + (this.factory[0].quantity * this.factory[0].profit)
+        this.monstorHPcounter = this.monstorHPcounter - this.damagePerSecond()
+        this.money = this.money + this.moneyPerSecond()
 
       }, 1000)
-
+    },
+    damagePerSecond() {
+      let n = 0
+      for (let i = 1; i < this.damageDealer.length; i++) {
+        n = n + this.damageDealer[i].quantity * this.damageDealer[i].profit
+      }
+      return n
+    },
+    moneyPerSecond() {
+      let n = 0
+      for (let i = 0; i < this.factory.length; i++) {
+        n = n + (this.factory[i].quantity * this.factory[i].profit)
+      }
+      return n
     },
     //Рендерит вкладку дамагеров или шахт, в зависимости от клика
     tabFactorySelect(usersChoice) {

@@ -18,8 +18,10 @@
       <div class="lavale">Lvl 1</div>
     </header>
     <div class="settings">
-      <h1 style="font-size: 20px; text-align: center;">Ваши преобретения</h1><br>
-      //Попробовать сделать возможность сохранения в ручную, по таймеру и настройки скорости сохронения<BR>
+      <h1 style="font-size: 20px; text-align: center;">Настройки/ статистика</h1><br>
+      {{cutback(damagePerSecond())}} - damagePerSecond<BR>
+      {{cutback(moneyPerSecond())}} - moneyPerSecond<BR>
+
       <button @click="gameSave()">Сохранить игру</button>
       <button @click="gameLoad()">Загрузить игру</button>
       Автосохранение(не раб.)
