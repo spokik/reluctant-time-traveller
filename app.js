@@ -159,10 +159,10 @@ const App = {
     },
     startTimer() {
       setInterval(() => {
-        this.monstorHPcounter = this.monstorHPcounter - this.damagePerSecond()
-        this.money = this.money + this.moneyPerSecond()
+        this.monstorHPcounter = this.monstorHPcounter - this.damagePerSecond() / 100
+        this.money = this.money + this.moneyPerSecond() / 100
 
-      }, 1000)
+      }, 10)
     },
     damagePerSecond() {
       let n = 0
