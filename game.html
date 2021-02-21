@@ -19,19 +19,28 @@
     </header>
     <div class="settings">
       <h1 style="font-size: 20px; text-align: center;">Настройки/ статистика</h1><br>
-      {{cutback(damagePerSecond())}} - damagePerSecond<BR>
-      {{cutback(moneyPerSecond())}} - moneyPerSecond<BR>
 
-      <button @click="gameSave()">Сохранить игру</button>
-      <button @click="gameLoad()">Загрузить игру</button>
-      Автосохранение(не раб.)
+      <div class="tabs__links">
+        <div v-bind:class="{ tabs__links_activ: settings }" @click="tabSettingsSelect('settings')">Настройки</div>
+        <div v-bind:class="{ tabs__links_activ: !settings }" @click="tabSettingsSelect('stat')">Cтатистика</div>
+      </div>
 
-      <input type="checkbox" id="checkbox" v-model="autoSave">
-      <label for="checkbox">{{ autoSave }}</label>
-      <br>
-      Next monstr
-      <input type="checkbox" id="checkboxis" v-model="isNextMonstor">
-      <label for="checkboxis">{{ isNextMonstor }}</label>
+      <div v-if="settings">
+        <button @click="gameSave()">Сохранить игру</button>
+        <button @click="gameLoad()">Загрузить игру</button>
+        <br><br>
+        Автосохранение(не раб.)
+        <input type="checkbox" id="checkbox" v-model="autoSave">
+        <label for="checkbox">{{ autoSave }}</label>
+        <br><br>
+        Автопереход к следующему монстру
+        <input type="checkbox" id="checkboxis" v-model="isNextMonstor">
+        <label for="checkboxis">{{ isNextMonstor }}</label>
+      </div>
+      <div v-else>
+        {{cutback(damagePerSecond())}} - damagePerSecond<BR>
+        {{cutback(moneyPerSecond())}} - moneyPerSecond<BR>
+      </div>
     </div>
 
     <main>
@@ -52,20 +61,17 @@
     <aside>
 
       <h1 style="font-size: 20px; text-align: center;">Ваши преобретения</h1>
-
-
       <div class="tabs__links">
         <div v-bind:class="{ tabs__links_activ: isDamage }" @click="tabFactorySelect('damage')">Урон</div>
         <div v-bind:class="{ tabs__links_activ: !isDamage }" @click="tabFactorySelect('factory')">Предприятия</div>
       </div>
-
-
       <div class="factory" v-for="(index, i) in  factoryListGeneration">
         <div class="factoryName">{{ index.name }}</div>
         <div class="price" @click="buyFactory(i)"> {{ cutback(factoryListGeneration[i].nowCost) }} </div>
         <div class="damage">{{index.text.profit}}: {{ cutback(factorydamage( index.profit, index.quantity))}}</div>
         <div class="quantity">{{index.text.quantity}}:{{index.quantity}}</div>
       </div>
+
     </aside>
     <footer>Футтер </footer>
   </div>

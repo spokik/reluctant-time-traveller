@@ -2,12 +2,11 @@
 const App = {
   data() {
     return {
-      title: `Список заметок`,
-      placeholderString: "Введите заметку",
       autoSave: true,
       inputValue: ``,
       money: 0,
       isDamage: true,
+      settings: true,
       monstorLVL: 1,
       partMostors: 0,
       isBoss: false,
@@ -31,9 +30,7 @@ const App = {
         { name: "Личная гвардия", baseCost: 2000, profit: 25, },
         { name: "Маленькая армия", baseCost: 40000, profit: 150, },
         { name: "Армия страны", baseCost: 800000, profit: 1000, },
-        { name: "Планетарная армия", baseCost: 16000000, profit: 10000, }
-
-        ,],
+        { name: "Планетарная армия", baseCost: 16000000, profit: 10000, }],
       factory: [],
       damageDealer: [{ name: `Боевые искусства`, quantity: 1, baseCost: 15, nowCost: 15, profit: 1, text: { "quantity": "Штук", "profit": "Урон" } }],
       styles: {
@@ -46,17 +43,12 @@ const App = {
           color: 'white',
         }
       },
-      notes: [`найти места для рыбалки`, `Выкинуть отчистки от мандаринок`],
     }
   },
   mounted() {
     this.startTimer()
-
-
     if (this.autoSave) {
-
     }
-
     // генерация начальных объектов через конструкторы
     function Factory(name, baseCost, profit) {
       this.name = name
@@ -91,19 +83,6 @@ const App = {
 
   },
   methods: {
-    addNote(event) {
-      if (this.inputValue !== ``) {
-        this.notes.push(this.inputValue)
-        this.inputValue = ``
-      }
-    },
-    toUpperCase(item) {
-      return item.toUpperCase(item)
-    },
-    removeNote(i) {
-      this.notes.splice(i, 1)
-    },
-    //Выше примеры от Владелена
     factorydamage(damage, pieces) {
       return damage * pieces
     },
@@ -140,22 +119,17 @@ const App = {
         factory: this.factory,
         damageDealer: this.damageDealer
       })
-
-
       //Код выгружающий данный игрока в локал сторадж
       localStorage.setItem('save', save)
       console.log(save)
 
     },
     gameLoad() {
-
       const loadData = JSON.parse(localStorage.save);
       this.money = loadData.money
       this.monstorLVL = loadData.monstorLVL
       this.factory = loadData.factory
       this.damageDealer = loadData.damageDealer
-
-
     },
     startTimer() {
       setInterval(() => {
@@ -178,6 +152,13 @@ const App = {
       return n
     },
     //Рендерит вкладку дамагеров или шахт, в зависимости от клика
+    tabSettingsSelect(usersChoice) {
+      if (usersChoice == 'settings') {
+        return this.settings = true
+      } else if (usersChoice == 'stat') {
+        return this.settings = false
+      } else { console.log(`error: ${usersChoice} is not valid`) }
+    },
     tabFactorySelect(usersChoice) {
       if (usersChoice == 'damage') {
         return this.isDamage = true
