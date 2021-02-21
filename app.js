@@ -206,6 +206,13 @@ const App = {
 
       return result
     },
+    isEnoughMoney(value) {
+      if (value > this.money) {
+        return "red"
+      } else {
+        return
+      }
+    },
     //Возвращает информацию о части монстра
     partMostorsView() {
       if (this.partMostors >= 0.9) {

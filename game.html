@@ -72,8 +72,10 @@
         <div v-bind:class="{ tabs__links_activ: !isDamage }" @click="tabFactorySelect('factory')">Предприятия</div>
       </div>
       <div class="factory" v-for="(index, i) in  factoryListGeneration">
-        <div class="factoryName">{{ index.name }}</div>
-        <div class="price" @click="buyFactory(i)"> {{ cutback(factoryListGeneration[i].nowCost) }} </div>
+        <div class="factoryName" :style="{'color': isEnoughMoney(factoryListGeneration[i].nowCost) }">{{index.name }}
+        </div>
+        <div class="price" @click="buyFactory(i)" :style="{'color': isEnoughMoney(factoryListGeneration[i].nowCost) }">
+          {{ cutback(factoryListGeneration[i].nowCost) }} </div>
         <div class="damage">{{index.text.profit}}: {{ cutback(factorydamage( index.profit, index.quantity))}}</div>
         <div class="quantity">{{index.text.quantity}}:{{index.quantity}}</div>
       </div>
