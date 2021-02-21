@@ -161,7 +161,6 @@ const App = {
       setInterval(() => {
         this.monstorHPcounter = this.monstorHPcounter - this.damagePerSecond() / 100
         this.money = this.money + this.moneyPerSecond() / 100
-
       }, 10)
     },
     damagePerSecond() {
@@ -241,13 +240,14 @@ const App = {
         this.monstorHPcounter = this.monstorsHP(this.monstorLVL) * 10
         this.money = this.money + this.monstorLVL * 80
       }
-      if (isBoss && !isBoss) {
+      if (isBoss && !isBoss) { //! проверь, скорее всего тут джолжно быть isBoss && !isBossDead
         this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
         this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
       }
       this.thisMonstorHP = this.monstorsHP(this.monstorLVL)
       this.monstorHPcounter = this.monstorsHP(this.monstorLVL)
       this.money = this.money + this.monstorLVL * 2
+
     }
   },
   computed: {
@@ -269,9 +269,11 @@ const App = {
     monstorHPcounter(value) {
       if (value <= 0) {
         this.partMostors = this.partMostors + 0.1
+
         if (this.partMostors >= 1 && this.isNextMonstor) {
           this.monstorLVL++
           this.partMostors = 0
+
         } else if (this.partMostors >= 0.9 && !this.isNextMonstor) {
           this.partMostors = this.partMostors - 0.1
         }
@@ -285,8 +287,11 @@ const App = {
           }
         }
         this.monstorUp(false)
+
+
       }
     },
+
     //инициализирует босса
     monstorLVL(value) {
 

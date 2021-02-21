@@ -42,7 +42,7 @@
         <div :style="[styles.progressBarMostor,proc()]">{{Math.round(monstorHPcounter)}} из {{ thisMonstorHP }} hp</div>
       </div>
       <div class="bossesTimer progressBar progressBar-grean">
-        <div :style="[styles.progressBarMostor,bossTimerDecrease()]">{{bossTimer/ 100}}
+        <div :style="[styles.progressBarMostor,bossTimerDecrease()]" v-if="isBoss">{{bossTimer/ 100}}
         </div>
       </div>
       <div class="clickZone" @click="clickDamage"></div>
