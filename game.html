@@ -10,7 +10,8 @@
 </head>
 
 <body>
-  <div class="App" id="VueJS">
+
+  <div class="App" id="app">
     <header>
 
       <div class="glory">Слава 0</div>
@@ -45,6 +46,9 @@
         Заработанно денег - 0<BR>
         Убито монстров - 0<BR>
         Убито боссов - 0<BR>
+        Максимально накопленно денег {{maxBank}}<BR>
+
+        <BR><BR>
         Придумать другую статистику
       </div>
     </div>
@@ -71,7 +75,8 @@
         <div v-bind:class="{ tabs__links_activ: isDamage }" @click="tabFactorySelect('damage')">Урон</div>
         <div v-bind:class="{ tabs__links_activ: !isDamage }" @click="tabFactorySelect('factory')">Предприятия</div>
       </div>
-      <div class="factory" v-for="(index, i) in  factoryListGeneration">
+
+      <div class="factory" v-for="(index, i) in  factoryListGeneration" :key="i">
         <div class="factoryName" :style="{'color': isEnoughMoney(factoryListGeneration[i].nowCost) }">{{index.name }}
         </div>
         <div class="price" @click="buyFactory(i)" :style="{'color': isEnoughMoney(factoryListGeneration[i].nowCost) }">
@@ -82,8 +87,11 @@
 
     </aside>
     <footer>Футтер </footer>
+
   </div>
-  <script src="https://unpkg.com/vue@next"></script>
+  <!-- <script src="https://unpkg.com/vue@next"></script> 
+  <script src="vue.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="app.js"></script>
 </body>
 
