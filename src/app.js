@@ -1,10 +1,18 @@
+import Vue from './vue';
+// Определяем новый компонент под именем todo-item
+Vue.component('todo-item', {
+  template: '> {{ money }}</li>',
+  props: ['money',`thisMonstorHP` ]
+
+})
+
 const app = new Vue( {
   el: '#app',
   data() {
     return {
       autoSave: true,
       inputValue: ``,
-      money: 0,
+      money: 170,
       maxBank: 0,
       isDamage: true,
       settings: true,
@@ -358,5 +366,4 @@ const app = new Vue( {
 });
 
 
-//const app = Vue.createApp(App);
-//app.mount("#VueJS");
+
