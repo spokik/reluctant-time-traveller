@@ -14,5 +14,8 @@ module.exports ={
       template:'./src/game.html'
     }),
     new CleanWebpackPlugin()
-  ]
+  ],
+  devServer: {
+    port: 4200
+  }
 }

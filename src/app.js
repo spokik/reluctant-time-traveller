@@ -1,10 +1,7 @@
 import Vue from './vue';
+import todoitem from './tamlate/todo-item'
 // Определяем новый компонент под именем todo-item
-Vue.component('todo-item', {
-  template: '> {{ money }}</li>',
-  props: ['money',`thisMonstorHP` ]
 
-})
 
 const app = new Vue( {
   el: '#app',
@@ -12,7 +9,7 @@ const app = new Vue( {
     return {
       autoSave: true,
       inputValue: ``,
-      money: 170,
+      money: 120,
       maxBank: 0,
       isDamage: true,
       settings: true,
