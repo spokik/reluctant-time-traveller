@@ -12,12 +12,10 @@
 <body>
 
   <div class="App" id="app">
-    <header>
 
-      <div class="glory">Слава 0</div>
-      <div class="money">Деньги {{cutback(money) }}</div>
-      <div class="lavale">Lvl 1</div>
-    </header>
+    <app-header :money="money" :cutback="cutback"></app-header>
+
+
     <div class="settings">
       <h1 style="font-size: 20px; text-align: center;">Настройки/ статистика</h1><br>
 

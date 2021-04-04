@@ -1,9 +1,10 @@
 import Vue from './vue';
-import todoitem from './tamlate/todo-item'
+import todoitem from './components/todo-item'
+import appHeader from './components/app-header'
 // Определяем новый компонент под именем todo-item
 
 
-const app = new Vue( {
+const vm = new Vue( {
   el: '#app',
   data() {
     return {
